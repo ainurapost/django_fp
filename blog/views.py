@@ -93,6 +93,7 @@ def add_post(request):
 
     return render(request, 'blog/add_post.html', {'form': form})
 
+
 def user(request, pk):
     user = get_object_or_404(User, id=pk)
     posts = Post.objects.filter(owner = pk)
@@ -101,6 +102,7 @@ def user(request, pk):
         'posts':posts,
     }
     return render(request, 'blog/user.html', context)
+
 
 def error_404(request,exception):
     return render(request, 'blog/404.html')
