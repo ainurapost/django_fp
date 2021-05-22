@@ -16,7 +16,6 @@ def retrieve(request, pk):
     post = get_object_or_404(Post, id=pk)
     post.views += 1
     post.save()
-
     if request.method == 'POST':
         form = CommentForms(request.POST)
         if form.is_valid():
@@ -78,3 +77,30 @@ def search(request):
         form = LoginForm()
 
     return render(request, 'blog/search.html', {'form': form})
+
+
+def add_post(request):
+    if request.method == 'POST':
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            user = authenticate(username=form.cleaned_data['username'],
+                                password=form.cleaned_data['password'])
+            if user is not None:
+                login(request, user)
+                return HttpResponseRedirect('/')
+    else:
+        form = LoginForm()
+
+    return render(request, 'blog/add_post.html', {'form': form})
+
+def user(request, pk):
+    user = get_object_or_404(User, id=pk)
+    posts = Post.objects.filter(owner = pk)
+    context = {
+        'user':user,
+        'posts':posts,
+    }
+    return render(request, 'blog/user.html', context)
+
+def error_404(request,exception):
+    return render(request, 'blog/404.html')

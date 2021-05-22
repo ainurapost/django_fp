@@ -1,0 +1,32 @@
+{% extends "blog/base.html" %}
+
+{% block title %}<title>Add Post</title>{% endblock %}
+
+{% block body %}
+
+    <div class="row">
+        <!-- Post content-->
+        <div class="d-flex justify-content-center">
+            <div class="col-lg-8">
+
+                    <!-- Post content-->
+                    <p class="lead"><big>Add New Post</big></p>
+                    Please fill out the following form and click the <big>Add Post</big> button.
+                    <hr />
+
+
+                    <div class="mb-3">
+                      <label for="add_post_title" class="form-label">Post Title</label>
+                      <textarea class="form-control" id="add_post_title" rows="1" placeholder="Post Title"></textarea>
+                    </div>
+                    <div class="mb-3">
+                      <label for="add_post_text" class="form-label">Post Text</label>
+                      <textarea class="form-control" id="add_post_text" rows="3" placeholder="Post Text"></textarea>
+                    <button class="btn btn-primary" type="submit">Add Post</button>
+                    </div>
+
+            </div>
+        </div>
+
+    </div>
+{% endblock %}

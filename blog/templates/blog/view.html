@@ -12,7 +12,7 @@
             <!-- Author-->
             <p class="lead">
                 by
-                <a href="#!">{{post.owner.last_name}} {{post.owner.first_name}}</a>
+                <a href="/user/{{post.id}}">{{post.owner.last_name}} {{post.owner.first_name}}</a>
             </p>
             <hr />
             <!-- Date and time-->
@@ -44,7 +44,7 @@
             {% for comment in comments %}
             <div class="media mb-4">
                 <div class="media-body">
-                    <h5 class="mt-0">{{ comment.owner.last_name }} {{ comment.owner.first_name }} </h5>
+                    <h5 class="mt-0"><a href="/user/{{comment.owner.id}}"> {{ comment.owner.last_name }} {{ comment.owner.first_name }} </a></h5>
                     {{ comment.text }}
                 </div>
             </div>
