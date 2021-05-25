@@ -30,6 +30,3 @@ class CommentForms(forms.Form):
     # text = forms.Textarea()
     text = forms.CharField(widget=forms.Textarea(attrs=inputAttrs))
 
-class SearchForms(forms.Form):
-    pass
-

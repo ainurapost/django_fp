@@ -1,6 +1,6 @@
 {% extends "blog/base.html" %}
 
-{% block title %} <title>Login page</title>{% endblock %}
+{% block title %} Login page ::{{ block.super }}{% endblock %}
 
 {% block nav %}{% endblock %}
 
@@ -14,7 +14,7 @@
         {{ form }}
         <div class="mb-3 mt-3">
           <label>
-              Еще не зарегистрированы? <a href="/register">Register</a>
+              Еще не зарегистрированы? <a href="{% url 'register' %}">Register</a>
           </label>
         </div>
 
@@ -26,3 +26,6 @@
 {% endblock %}
 
 {% block footer %}{% endblock %}
+
+
+

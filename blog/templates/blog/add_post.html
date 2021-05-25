@@ -1,19 +1,25 @@
 {% extends "blog/base.html" %}
 
-{% block title %}<title>Add Post</title>{% endblock %}
+{% block title %}
+    Add Post :: {{ block.super}}
+{% endblock %}
+
+{% block sidebar %}
+      {% include 'blog/inc/_sidebar.html' %}
+{% endblock %}
 
 {% block body %}
 
+<form action="{% url 'add_post' %}" method="post">
     <div class="row">
         <!-- Post content-->
-        <div class="d-flex justify-content-center">
-            <div class="col-lg-8">
+        <div class="d-flex ">
+            <div class="col-lg-9">
+`
 
-                    <!-- Post content-->
-                    <p class="lead"><big>Add New Post</big></p>
+                    <h1>Add New Post</h1>
                     Please fill out the following form and click the <big>Add Post</big> button.
                     <hr />
-
 
                     <div class="mb-3">
                       <label for="add_post_title" class="form-label">Post Title</label>
@@ -22,11 +28,13 @@
                     <div class="mb-3">
                       <label for="add_post_text" class="form-label">Post Text</label>
                       <textarea class="form-control" id="add_post_text" rows="3" placeholder="Post Text"></textarea>
-                    <button class="btn btn-primary" type="submit">Add Post</button>
+                    <button class="btn btn-primary mt-3" type="submit">Add Post</button>
                     </div>
 
             </div>
         </div>
 
     </div>
+
+</form>
 {% endblock %}

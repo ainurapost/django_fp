@@ -1,7 +1,7 @@
 {% extends "blog/base.html" %}
 
 {% block title %}
-    {{ title }} :: {{ block.super }}
+    {{ category.title }} :: {{ block.super }}
 {% endblock %}
 
 {% block body %}
@@ -9,14 +9,14 @@
         {% for post in post_list %}
             <div class="card mb-3">
                 <div class="card-header">
-                    Категория: <a href="{% url 'get_category' post.category.pk %}"> {{ post.category}}</a>
+                    Категория: <a href="{{ post.category.get_absolute_url }}"> {{ post.category}}</a>
                 </div>
 
                 <div class="card-body">
                     <img src="..." class="card-img-top" alt="...">
                     <h5 class="card-title">{{ post.title }}</h5>
                     <p class="card-text">{{ post.clipped_text }}</p>
-                    <a href="{% url 'retrieve' post.id %}" class="btn btn-primary">Read...</a>
+                    <a href="/view/{{ post.id }}" class="btn btn-primary">Read...</a>
                 </div>
             </div>
 

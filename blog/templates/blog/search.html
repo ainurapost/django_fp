@@ -1,43 +1,22 @@
 {% extends "blog/base.html" %}
 
-{% block title %} <title>Search</title>{% endblock %}
+{% block title %}Search:: {{ block.super }}{% endblock %}
 
 {% block body %}
 
+<form method="get" class="d-flex mb-5" >
+  <input class="form-control me-2" type="search" name="query" placeholder="Search" aria-label="Search">
+  <button class="btn btn-outline-success" type="submit">Search</button>
+</form>
 
-        <form class="d-flex mb-5" >
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success" type="submit">Search</button>
-        </form>
-
-    {% if post_list %}
-        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-            {% for post in post_list %}
-            <div class="col">
-                <div class="card">
-                    <img src="..." class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ post.title }}</h5>
-                        <p class="card-text">{{ post.clipped_text }}</p>
-                        <a href="/view/{{ post.id }}" class="btn btn-primary">Read...</a>
-                    </div>
-                </div>
-            </div>
-            {% endfor %}
+{% for item in res %}
+    <div class="card mb-3">
+        <div class="card-body">
+            <h5 class="card-title">{{ item.title }}</h5>
+            <p class="card-text">{{ item.clipped_text }}</p>
+            <a href="/view/{{ item.id }}" class="btn btn-primary">Read...</a>
         </div>
-    {% else %}
+    </div>
+{% endfor %}
 
-            <div class="list-group">
-
-              <a href="#" class="list-group-item list-group-item-action" aria-current="true">
-                The current link item
-              </a>
-              <a href="#" class="list-group-item list-group-item-action">A second link item</a>
-              <a href="#" class="list-group-item list-group-item-action">A third link item</a>
-              <a href="#" class="list-group-item list-group-item-action">A fourth link item</a>
-              <a href="#" class="list-group-item list-group-item-action disabled" tabindex="-1" aria-disabled="true">A disabled link item</a>
-            </div>
-
-
-    {% endif %}
 {% endblock %}

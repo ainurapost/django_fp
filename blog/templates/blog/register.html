@@ -1,6 +1,6 @@
 {% extends "blog/base.html" %}
 
-{% block title %} <title>Login page</title>{% endblock %}
+{% block title %}Login page{% endblock %}
 
 {% block nav %}{% endblock %}
 
@@ -15,7 +15,7 @@
 
         <div class="mb-3 mt-3">
           <label>
-              Уже зарегистрированы? <a href="/login">Login</a>
+              Уже зарегистрированы? <a href="{% url 'login' %}">Login</a>
           </label>
         </div>
 

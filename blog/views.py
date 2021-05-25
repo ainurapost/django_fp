@@ -1,15 +1,29 @@
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
 from django.shortcuts import render, get_object_or_404
-from .models import Post, Comment
+from .models import Post, Comment, Category
 from .forms import LoginForm, RegisterForm, CommentForms
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
+
 
 
 def index(request):
     post_list = Post.objects.all()
-    context = {'post_list': post_list}
+    categories= Category.objects.all()
+    context = {'post_list': post_list,
+               'title': 'Main page',
+               'categories': categories,}
     return render(request, 'blog/index.html', context)
+
+
+def get_category(request, category_id):
+    post_list = Post.objects.filter(category_id=category_id)
+    categories =Category.objects.all()
+    category = Category.objects.get(pk=category_id)
+    return render(request, 'blog/category.html', {'post_list': post_list,
+                                                  'categories': categories,
+                                                  category: category}
+                  )
 
 
 def retrieve(request, pk):
@@ -65,18 +79,18 @@ def loginView(request):
 
 
 def search(request):
-    if request.method == 'POST':
-        form = LoginForm(request.POST)
-        if form.is_valid():
-            user = authenticate(username=form.cleaned_data['username'],
-                                password=form.cleaned_data['password'])
-            if user is not None:
-                login(request, user)
-                return HttpResponseRedirect('/')
-    else:
-        form = LoginForm()
+    if not request.user.is_authenticated:
+        return HttpResponseRedirect('/login')
 
-    return render(request, 'blog/search.html', {'form': form})
+    query = request.GET.get('query')
+    if not query:
+        query = ""
+        pass
+    res= Post.objects.filter(title__icontains = query)
+    print(query)
+    print(res)
+
+    return render(request, 'blog/search.html', {'res': res} )
 
 
 def add_post(request):
@@ -90,7 +104,6 @@ def add_post(request):
                 return HttpResponseRedirect('/')
     else:
         form = LoginForm()
-
     return render(request, 'blog/add_post.html', {'form': form})
 
 
