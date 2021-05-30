@@ -4,6 +4,7 @@
 
 {% block body %}
 
+<<<<<<< HEAD
 <form method="get" class="d-flex mb-5" >
   <input class="form-control me-2" value = "{{request.GET.query }}" type="search" name="query" placeholder="Search" aria-label="Search">
   <button class="btn btn-outline-success" type="submit">Search</button>
@@ -18,5 +19,20 @@
         </div>
     </div>
 {% endfor %}
+=======
+
+        <form method="get" class="d-flex mb-5" >
+          <input class="form-control me-2" value="{{request.GET.query}}" type="search" name="query" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+
+    {% if result %}
+        <div class="list-group">
+            {% for res in result %}
+                <a href="/view/{{res.id}}" class="list-group-item list-group-item-action">{{res.title}}</a>
+            {% endfor %}
+        </div>
+    {% endif %}
+>>>>>>> 1eb85dca06f7d85571f1f321a84ba3bfe0ba2c87
 
 {% endblock %}

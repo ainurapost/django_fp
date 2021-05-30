@@ -6,6 +6,7 @@ urlpatterns = [
     path('category/<int:category_id>', views.get_category, name='get_category'),
     path('', views.index, name='index'),
     path('view/<int:pk>/', views.retrieve, name='retrieve'),
+    path('rate/<int:pk>', views.rate, name='rate'),
     path('register', views.reqister, name='register'),
     path('login', views.loginView, name='login'),
     path('register', views.reqister, name='register'),
