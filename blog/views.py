@@ -4,6 +4,7 @@ from django.shortcuts import render, get_object_or_404
 from .models import Post, Comment, Category
 from .forms import LoginForm, RegisterForm, CommentForms
 from django.http import HttpResponseRedirect, HttpResponse
+from django.db.models import Q
 
 
 
@@ -83,13 +84,13 @@ def search(request):
         return HttpResponseRedirect('/login')
 
     query = request.GET.get('query')
-    if not query:
-        query = ""
-        pass
-    res= Post.objects.filter(title__icontains = query)
+    if query is None:
+        return render(request, 'blog/search.html')
+
+    res= Post.objects.filter(Q(title__icontains = query)|
+                                 Q(text__icontains = query))
     print(query)
     print(res)
-
     return render(request, 'blog/search.html', {'res': res} )
 
 
@@ -105,6 +106,8 @@ def add_post(request):
     else:
         form = LoginForm()
     return render(request, 'blog/add_post.html', {'form': form})
+
+
 
 
 def user(request, pk):

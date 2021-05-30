@@ -27,15 +27,12 @@ class Comment(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
     text = models.TextField()
 
-
-
     def __str__(self):
         return f'{self.owner} - {self.post}'
 
 
 class Category(models.Model):
     title = models.CharField(max_length=150, db_index=True, verbose_name='Категория')
-
 
     def __str__(self):
         return f'{self.title}'
